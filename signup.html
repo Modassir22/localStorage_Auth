@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp Page</title>
+    <style>
+        body{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <h1>SignUp Page</h1>
+    <div>
+        <form action="">
+            <label for="f-name">Name</label>
+            <input id="f-name" type="text" placeholder="Name" name="name" required><br><br>
+            <label for="user">Username</label>
+            <input id="user" type="text" placeholder="Username" name="username"><br><br>
+            <label for="pass">Password</label>
+            <input id="pass" type="password" placeholder="Password" name="password"><br><br>
+            <button type="submit" class="sign">Sign Up</button><br>
+           <p>Already Have an Account?<a href="login.html">Login</a></p>
+        </form>
+    </div>
+    <script>
+        
+         let btn = document.querySelector(".sign");
+         btn.addEventListener("click",(e)=>{
+            e.preventDefault();
+            let name = document.querySelector("#f-name").value;
+            let username = document.querySelector("#user").value;
+            let password = document.querySelector("#pass").value;
+            if(register(username,password)){
+                alert("Succesfully register");
+            }else{
+                alert("User Already exist");
+            }
+            shift();
+         })
+
+         function register(username,password){
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            if(users.some(u=>u.username === username)){
+                return false;
+            }else{
+                users.push({username,password});
+                localStorage.setItem('users', JSON.stringify(users));
+                return true;
+            }
+           
+         }
+
+         function shift(){
+            window.location.href="Welcome.html";
+         }
+       
+     
+    </script>
+</body>
+</html>

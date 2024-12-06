@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <h2>Login Page</h2>
+    <div>
+        <form action="">
+            <label for="user">Username</label>
+            <input id="user" type="text" placeholder="Username" name="username"><br><br>
+            <label for="pass">Password</label>
+            <input id="pass" type="password" placeholder="Password" name="password"><br><br>
+            <button class="login-f">Login</button><br>
+            <p>Don't Have An account? <a href="signup.html">Sign Up</a></p>
+        </form>
+    </div>
+    <script>
+       let btn = document.querySelector(".login-f");
+        btn.addEventListener("click",(e)=>{
+           e.preventDefault();
+           
+            let username = document.querySelector("#user").value;
+            let password = document.querySelector("#pass").value;
+            if(auth(username,password)){
+                alert("Succesfuly Login");
+                shift();
+            }else{
+                alert("User Doesn't Exist");
+            }
+            
+           }
+
+        )
+      
+       
+       function auth(username,password){
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        const user = users.find(u=>u.username === username && u.password === password);
+        if(user){
+            return true;
+        }else{
+            return false;
+        }
+
+       }
+
+       function shift(){
+        window.location.href="Welcome.html";
+     }
+            
+    </script>
+</body>
+</html>
